@@ -10,11 +10,3 @@ if (!Array.prototype.sum) {
 
 let arr = [1, 2, 3, 4]
 console.log(arr.sum());
-
-
-
-
-
-
-
-
