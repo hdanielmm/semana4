@@ -15,3 +15,16 @@ if (!String.prototype.palindromo) {
 
 var s = "anita lava la tina";
 console.log(s.palindromo());
+
+// Refactor
+
+/*if (!String.prototype.palindrome) {
+  String.prototype.palindrome = function () {
+    var s = this.replace(/\s/gi, '');
+    var s1 = s.split("").reverse().join("");
+
+    return s === s1;
+  }
+}
+
+console.log("anita lava la tina".palindrome());*/
