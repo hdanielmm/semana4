@@ -108,6 +108,13 @@ const cars =
 const ferraris = cars.filter(element => element.brand === 'Ferrari')
 console.log(ferraris);
 
+// Función
+let funcion = (brand) => { return cars.filter(e => e.brand === brand); }
+console.log(funcion("Ferrari"));
+
+let ferrari = (fn) => { return cars.filter(fn); }
+console.log(ferrari(cars => cars.brand === "Ferrari"));
+
 // Nineties
 const nineties = cars.filter(element => element.model >= 1980 && element.model <= 1990)
 console.log(nineties);
