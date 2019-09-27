@@ -18,7 +18,6 @@ const fact = n => {
   return memo[n];
 }
 
-/************** */
 const memoizer = (memo, formula) => {
   return n => {
     if (!memo[n]) {
