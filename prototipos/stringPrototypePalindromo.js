@@ -1,6 +1,6 @@
 
-if (!String.prototype.palindromo) {
-  String.prototype.palindromo = function () {
+if (!String.prototype.palindrome) {
+  String.prototype.palindrome = function () {
     var s1 = this.split("").reverse().filter(function (str) {
       return /\S/.test(str);
     }).join("");
@@ -14,7 +14,7 @@ if (!String.prototype.palindromo) {
 }
 
 var s = "anita lava la tina";
-console.log(s.palindromo());
+console.log(s.palindrome());
 
 // Refactor
 

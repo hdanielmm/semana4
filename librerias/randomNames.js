@@ -1,3 +1,5 @@
+// Random names with readLineSync
+
 const readlineSync = require('readline-sync');
 const faker = require('faker');
 const fs = require('fs');
