@@ -13,7 +13,9 @@ const after = (num, fn) => {
   }
 }
 
-const hello = after(2, () => console.log("Hola"));
+const hello = after(5, () => console.log("Hola"));
+console.log(hello);
+
 hello(); // 
 hello(); // 
 hello(); // 
