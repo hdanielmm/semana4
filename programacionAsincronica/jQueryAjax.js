@@ -1,5 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="app.js"></script>
+<script src="app.js"></script>
 
 $(document).on("keyup", function () {
     (".circle").hide();
@@ -33,3 +33,13 @@ $('.container').on("keyup", function(e) {
     $(".container").removeClass("error");
   }
 });
+
+$("#add").on("click", function(e) {
+  let count = $("li").length;
+  $(".elements").append("<li>Elemento " + count + "</li>");
+});
+
+$(".elements").on("click", 'li', function(e) {
+  $(e.currentTarget).toggleClass("marked");
+});
+    

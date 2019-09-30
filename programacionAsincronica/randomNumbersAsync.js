@@ -47,91 +47,58 @@ Promise.all([getNumberOfNames, getFileName])
     console.log(error);
 
   });
+ /*************************************** */
 
-// let generateNames = () => {
-//   getNumberOfNames
-//     .then(response => {
-//       for (let i = 0; i < response; i++) {
-//         fs.writeFile("text.txt", faker.name.firstName() + "\n", { flag: "a" }, err => {
-//           if (err) throw err;
-//           console.log("The file has been saved");
-//         });
-//       }
-//     })
-//     .catch(error => {
-//       console.log(error);
-//     });
-// }
+ const faker = require('faker');
+const fs = require('fs');
+const readline = require('readline');
 
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-// generateNames();
-
-// askQuestion
-//   .then(res => {
-//     console.log(res);
-//   })
-//   .then(res => {
-//     console.log("do this after first then" );
-//     rl.question()
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-
-// let writeFile = new Promise((resolve, reject) => {
-//   let name = "file.txt";
-//   if(name) {
-//     resolve(() => {
-//       fs.writeFile(name);
-//     });
-//   }
-// });
-
-// writeFile
-// .then(response => {
-//   console.log("nombre del archivo:", response);
-
-// });
-
-
-
-
-/***************************
- let numNames, fileName;
-ask("¿Cuántas nombres quieres generar?")
-  .then(answer => {
-    numNames = answer;
-    return ask("El nombre del archivo: ");
-  }).then(answer => {
-    fileName = answer;
-
-    // generar los nombres
-    names = ....
-    return saveFile(fileName, names);
-  }).then(() => {
-    console.log("Finalizó");
-  }).catch(err => {
-    console.log(err.message);
+let ask = question => {
+  return new Promise((resolve, reject) => {
+    rl.question(question, answer => {
+      if (answer) {
+        resolve(answer);
+      } else {
+        reject("Some error ocurred");
+      }
+    });
   });
-
-*/
-
-
-
-
-
-
-
-
-
-/*
-const numberNames = readlineSync.question('\nHow many names would you like to generate? ');
-const fileName = readlineSync.question('Please enter a file name: ');
-
-
-for (let i = 0; i < numberNames; i++) {
-  fs.writeFileSync(fileName + '.txt', faker.name.firstName() + '\n', { flag: 'a' });
 }
-console.log('File text ' + fileName + '.txt was generated with ' + numberNames + ' names!\n');
 
-*/
+let writeFile = (fileName, content) => {
+  return new Promise((resolve, reject) => {
+    fs.writeFile(fileName, content, err => {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve();
+    });
+  });
+}
+
+let numNames, fileName;
+ask('How many names would you like to generate? ')
+  .then(ans => {
+    numNames = ans;
+    return ask("Enter a file name: ");
+  }).then((ans) => {
+    fileName = ans;
+    const names = [];
+    for (let i = 0; i < numNames; i++) {
+      names.push(faker.name.firstName());
+    }
+    return names;
+  }).then(names => {
+    return writeFile(fileName, names.join("\n"));
+  }).then(() => {
+    console.log("Archivo generado");
+    rl.close();
+  }).catch(err => {
+    console.log("Ocurrió un error: " + err);
+  });
